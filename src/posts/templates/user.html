@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <img src="{{ user.profile.image.url }}">
+    <h2>{{ user.username }}  
+    </h2>
+    {% if request.user != user %}
+        {% if not user in request.user.profile.blockedUsers.all %}
+            <a href="{% url 'block_user' user.username %}">Block user</a>
+        {% else %}
+            <a href="{% url 'unblock_user' user.username %}">Unblock user</a>
+        {% endif %}
+    {% endif %}
+    <p>Full name: {{ user.first_name }} {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Bio: {{ user.profile.bio }}</p>
+    <h3>Posts:</h3>
+    {% if not request.user in user.profile.blockedUsers.all %}
+    {% for post in posts %}
+    <p><a href="{% url 'post_detail' post.id %}">{{ post }}</a></p>
+{% endfor %}
+{% endif %}
+    
+</body>
+{% endblock %}

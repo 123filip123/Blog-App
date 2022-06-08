@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<section class="hero">
+    <div class="hero-body">
+        <form class="d-flex" method=POST action="{% url 'filterDate'  %}">
+            {% csrf_token %}
+            <label for="startDate">Start</label>
+            <input id="startDate" class="form-control" type="date" name="startDate" />
+            <label for="endDate">End</label>
+            <input id="endDate" class="form-control" type="date" name="endDate" />
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                name="searched">
+            <button class="btn btn-outline-secondary" type="submit">Filter</button>
+        </form>
+
+        <div class="container">
+            <section class="section">
+                <div class="columns">
+                    <div class="column is-8 is-offset-2">
+                        <div class="content is-medium">
+                            <h1></h1>
+                            <h3>Search results:</h3>
+                        </div>
+                        
+                        {% for post in posts %}
+                            {% if not request.user in post.author.profile.blockedUsers.all %}
+                            <div class="content is-medium">
+                                <a href="{% url 'post_detail' post.id %}">
+
+                                    <p class="title">{{ post.title }} by {{ post.author }}</p>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% empty %}
+                                <div class="content">
+                                    <p> No result for the given query...</p>
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+{% endblock %}

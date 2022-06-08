@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <h2>Add blog</h2>
+    <form class="site-form" action="{% url 'add_blog' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-success">Add blog</button>
+    </form>
+</body>
+{% endblock %}

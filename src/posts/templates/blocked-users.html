@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your blocked users:</h2>
+<h4><small>(these users can't see your posts...)</small></h4>
+
+<ul>
+    {% for blockedUser in user.profile.blockedUsers.all %}
+
+        <li><a href="{% url 'user_detail' blockedUser.username %}">{{ blockedUser }}</a></li>
+
+    {% empty %}
+    <p><small>You have no users blocked...</small></p>
+    {% endfor %}
+
+</ul>
+{% endblock %}

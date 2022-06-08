@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>{{ post.title }}</h1>
+    {% if request.user == post.author %}
+    <a href="{% url 'edit_post' post.id %}">Edit post...</a>
+    {% endif %}
+    <div><strong>Created by: {{ post.author }}  </strong><small style="margin-left:10px">      {{ post.created_at|timesince }} ago</small></div>
+    
+    <div>Last edited: {% if post.last_edited_at %}
+        {{ post.last_edited_at }}
+        {% else %}
+        Never
+        {% endif %}
+    </div>
+    
+
+    <br>
+    {% if post.image %}
+                    <figure class="image mb-6">
+                        <img src="{{ post.image.url }}">
+                    </figure>
+    {% endif %}
+    <p>{{ post.body }}</p>
+</div>
+<hr>
+<h2 class="subtitle is-4">Comments</h2>
+<form method="post" class="mb-6">
+    {% csrf_token %}
+    {{ form }}
+
+    <div class="field">
+        <div class="control">
+            <button class="button is-success">Submit comment</button>
+        </div>
+    </div>
+</form>
+
+{% for comment in post.comments.all %}
+<br>
+                                        <article class="media box">
+                                            <div class="media-content">
+                                                <a href="{% url 'user_detail' comment.author.username %}"><strong>{{ comment.author }}</strong></a> <small>{{ comment.created_at|timesince }} ago</small>
+                                                {% if comment.author == request.user or post.author == request.user %}
+                                                    <a href="{% url 'edit_comment' comment.id %}">Edit</a>
+                                                {% endif %}
+                                                <br>
+                                                {{ comment.body }}
+                                            </div>
+                                        </article>
+{% endfor %}
+{% endblock %}
