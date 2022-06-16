@@ -1,5 +1,5 @@
 # Blog-App
-Made in Django.
+Made in Django. Designed with Boostrap.
 
 Create a user trough admin interface.
 Admin credentials (admin : admin).
@@ -13,4 +13,4 @@ View other users profiles.
 Block other users from viewing your posts.
 Search by title and description. Filter by date (from-to).
 
-Front-end design not finished (*yet*).
+Part of an assignment from a class at the FCSE in Skopje.
