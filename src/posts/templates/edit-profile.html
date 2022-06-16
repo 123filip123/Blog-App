@@ -5,8 +5,8 @@
     <h2>Edit your profile:</h2>
     <form class="site-form" action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ userForm }}
-        {{ profileForm }}
+        {{ userForm.as_p }}
+        {{ profileForm.as_p }}
         <button type="submit" class="btn btn-success">Submit changes</button>
     </form>
 </body>

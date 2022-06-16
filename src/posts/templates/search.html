@@ -6,10 +6,10 @@
     <div class="hero-body">
         <form class="d-flex" method=POST action="{% url 'filterDate'  %}">
             {% csrf_token %}
-            <label for="startDate">Start</label>
-            <input id="startDate" class="form-control" type="date" name="startDate" />
-            <label for="endDate">End</label>
-            <input id="endDate" class="form-control" type="date" name="endDate" />
+            <label for="startDate">Start:</label>
+            <input id="startDate" class="form-control" type="date" name="startDate" style="margin-right:10px"/>
+            <label for="endDate">End:</label>
+            <input id="endDate" class="form-control" type="date" name="endDate" style="margin-right:10px"/>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                 name="searched">
             <button class="btn btn-outline-secondary" type="submit">Filter</button>
@@ -26,11 +26,15 @@
                         
                         {% for post in posts %}
                             {% if not request.user in post.author.profile.blockedUsers.all %}
-                            <div class="content is-medium">
-                                <a href="{% url 'post_detail' post.id %}">
-
-                                    <p class="title">{{ post.title }} by {{ post.author }}</p>
-                                </a>
+                            <div class="card" style="width: 30rem;">
+                                {% if post.image %}<a href="{% url 'post_detail' post.id %}"  >
+                                <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap"></a>
+                                {% endif %}
+                                <div class="card-body"><a href="{% url 'post_detail' post.id %}" >
+                                  <h5 class="card-title"><b>{{ post.title }}</b></h5></a>
+                                  <p class="card-text" style="height:40px;"><a href="{% url 'user_detail' post.author.username %}" ><img src="{{ post.author.profile.image.url }}" style="height:75%; width:auto; border-radius: 50%; margin-right: 7px;"><b>{{ post.author }}</b></a>
+                                    <br><small class="text-muted">{{ post.created_at|timesince }} ago</small></p>
+                                </div>
                             </div>
                             {% endif %}
                             {% empty %}

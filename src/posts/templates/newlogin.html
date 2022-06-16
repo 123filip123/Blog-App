@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+  <title>MyBlog</title>
+</head>
+
+<body style="background-color: #fafafa;">
+
+
+  <div class="card mb-1" style="width: 800px; 
+        margin-top: 10%;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="../../media/uploads/blog-logo.png" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8" style="background-color: #1e9c79;
+              ">
+        <div class="card-body">
+
+          <form method=POST action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label" style="color:white">Username</label>
+              <input type="username" class="form-control" id="exampleInputEmail1" name="inputUsername">
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label" style="color:white">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" name="inputPassword">
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+            {% endif %}
+            <div style="background-color: white; border-radius: 8%;"><button type="submit"
+                class="btn btn-outline-success" style="width: 100%; ">Login</button></div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer style="background-color: #1e9c79;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  justify-content: center;">
+    <h6 style="color: white; padding-top:10px; padding-bottom: 5px; padding-right: 20px;">Created by Filip Popovski</h6>
+    <div class="footer-icon-container">
+      <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            padding-right:3px;
+            " href="https://github.com/123filip123/Blog-App"><img src="../../media/github-logo2.png"
+          style="width: 30px; margin-top:5px;"></a>
+      <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            padding-right:3px;" href="https://www.linkedin.com/in/filip-popovski-188773215/"><img
+          src="../../media/linkedin-logo.png" style="width: 30px; margin-top:5px;"></a>
+      <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            padding-right:3px;" href="mailto: filippopovski1998@gmail.com"><img src="../../media/email-logo.png"
+          style="width: 30px; margin-top:5px;"></a>
+    </div>
+
+  </footer>
+
+
+
+
+
+</body>
+
+</html>

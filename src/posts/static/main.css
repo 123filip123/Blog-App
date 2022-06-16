@@ -1,0 +1,99 @@
+.login-container {
+    display: table-row;
+
+}
+
+.login-logo-container {
+    display: table-cell;
+    background-color: white;
+    border-color: red;
+}
+
+.login-form-container {
+    display: table-cell;
+    background-color:#1e9c79;
+    border-color: blue;
+}
+
+
+.card {
+    margin: 0 auto;
+    text-align: left;
+    width: 767px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    
+}
+
+/* .container {
+    display: flex;
+    justify-content: center;
+} */
+
+body {
+    background-color: #fafafa;
+}
+
+.navbar {
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.nav-logo {
+    width:100%;
+    height: auto;
+}
+
+.navbar-brand {
+    width: 50px;
+}
+
+.nav-profileImage {
+    width:30px;
+    height: auto;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.nav-user {
+    text-align: center;
+   
+}
+
+.post {
+    margin: 0 auto;
+    text-align: left;
+    width: 767px;
+}
+
+.post--image-container {
+    width:100%;
+    height: auto;
+    
+}
+
+.comments-container {
+    margin: 0 auto;
+    text-align: left;
+    width: 767px;
+}
+
+footer {
+    background-color: #1e9c79;
+}
+
+a {
+    color: black;
+}
+
+a:link {
+    
+    text-decoration: none;
+  }
+
+a:hover {
+    text-decoration: underline;
+    color:black;
+}

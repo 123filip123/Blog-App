@@ -1,4 +1,5 @@
-from email import contentmanager
+from contextlib import redirect_stderr
+from email import contentmanager, message
 from multiprocessing import context
 import re
 import datetime
@@ -7,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from . import forms
 from .models import Post
 from django.utils.text import slugify
@@ -105,6 +107,8 @@ def post_detail_view(request,pk):
 @login_required(login_url="../../login/")
 def user_view(request,username):
     user = User.objects.get(username=username)
+    if user == request.user:
+        return redirect('profile')
     posts=Post.objects.filter(author=user)
     return render(request,'user.html',{'user':user,'posts':posts})
 
@@ -141,6 +145,26 @@ def filterDate(request):
     else:
         return render(request,'search.html',{})
 
+def about_view(request):
+    return render(request,'about.html')
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST['inputUsername']
+        password = request.POST['inputPassword']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('posts')
+            # Redirect to a success page. 
+        else:
+            # Return an 'invalid login' error message.
+            messages.success(request,("Error logging in... Try again..."))
+            return redirect('login')
+    else:
+        return render(request,'newlogin.html')
+
 @login_required(login_url="../../login/")
 def blocked_users_view(request):
 
@@ -162,22 +186,7 @@ def block_user_view(request,username):
     posts=Post.objects.filter(author=user)
     return render(request,'user.html',{'user':user,'posts':posts})
 
-# def edit_profile_view(request):
-#     if request.method == 'POST':
-#         profileForm = forms.EditProfile(request.POST,request.FILES,instance=request.user.profile)
-#         userForm = forms.EditUser(request.POST,instance=request.user)
-#         if profileForm.is_valid and userForm.is_valid:
-#             profile = profileForm.save(commit=False)
-#             user = userForm.save(commit=False)
-#             user.save()
-#             profile.user=user
-#             profile.save()
-            
-#             return redirect('profile')
-#     else: 
-#         profileForm = forms.EditProfile()
-#         userForm = forms.EditUser()
-#     return render(request,'edit-profile.html',{'profileForm':profileForm, 'userForm':userForm})
+
 
 def edit_profile_view(request):
     profileForm = forms.EditProfile(instance=request.user.profile)
@@ -208,7 +217,7 @@ def edit_post_view(request,pk):
         form = forms.EditPost(request.POST,request.FILES,instance=post)
         if form.is_valid:
             updatedPost = form.save(commit=False)
-            updatedPost.last_edited_at = datetime.datetime.now()
+            updatedPost.last_edited_at = datetime.now()
             updatedPost.save()
             return redirect('post_detail',pk=post.id)
 
@@ -234,4 +243,7 @@ def edit_comment_view(request,pk):
             return redirect('post_detail',pk=comment.post.id)
 
     return render(request, 'edit-comment.html',{'form':form})
+
+def newlogin_view(request):
+    return render(request,'newlogin.html',{})
     

@@ -5,7 +5,7 @@
     <h2>Edit blog</h2>
     <form class="site-form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-success">Submit changes</button>
     </form>
 </body>

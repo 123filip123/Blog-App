@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content:center">
+<div class="card" style="width: 18rem;">
+    <img src="../../media/uploads/profilePic2.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text" >
+        <h4 style="text-align:center">Filip Popovski</h4>
+       <div style="text-align:center">Computer science student at the FCSE in Skopje.</div> 
+        <div style=" display:flex; justify-content:center;margin-top:10px; margin-bottom: -20px; ">
+            <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            margin-right:30px;
+            " href="https://github.com/123filip123/Blog-App"><img src="../../media/github-logo2G.png"
+          style="width: 35px; margin-top:5px;"></a>
+      <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            margin-right:30px;" href="https://www.linkedin.com/in/filip-popovski-188773215/"><img
+          src="../../media/linkedin-logoG.png" style="width: 35px; margin-top:5px;"></a>
+      <a style="width:30px;
+            height: auto;
+            padding-left: 3px;
+            padding-right:3px;" href="mailto: filippopovski1998@gmail.com"><img src="../../media/email-logoG.png"
+          style="width: 35px; margin-top:5px;"></a>
+        </div>
+      </p>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../../media/uploads/blog-logo.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">
+        <h4 style="text-align:center">Blog app</h4>
+        Made with Django framework and designed with Bootstrap.<br><br>
+        Part of an assignment from a class at the FCSE in Skopje.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

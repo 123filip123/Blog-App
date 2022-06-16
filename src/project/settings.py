@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# STATICFILES_DIRS= [
+#     "/src/posts/static"
+# ]
+
 
 # Application definition
 

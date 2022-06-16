@@ -9,6 +9,7 @@ class CreateBlog(forms.ModelForm):
         fields = ['title','body','image']
 
 class CommentForm(forms.ModelForm):
+    body = forms.CharField(label='Comment',widget=forms.Textarea(attrs={"rows":3,"cols":101}))
     class Meta:
         model = models.Comment
         fields = ['body']
